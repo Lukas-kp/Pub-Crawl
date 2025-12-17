@@ -43,7 +43,7 @@ PUBCRAWL_STOPS = [
         "rule": "Ingen siger et ord før de har drukket en genstand.",
     },
     {
-        "name": "Bodegaen",
+        "name": "Willi's",
         "address": "Åboulevarden 39, 8000 Aarhus C",
         "maps_url": "https://www.google.com/maps/place/Willi's/@56.1565188,10.2057896,617m/data=!3m2!1e3!4b1!4m6!3m5!1s0x464c3f70a9e4e737:0x3fc6d503e66c21be!8m2!3d56.1565188!4d10.2073005!16s%2Fg%2F11qc0bv6s9?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D",
         "rule": "Alle skal have en sidevogn.",
