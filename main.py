@@ -65,7 +65,6 @@ PUBCRAWL_STOPS = [
 
 
 def make_apple_maps_url(name: str, address: str) -> str:
-    # Åbner Apple Maps (web link som åbner Maps-app på iPhone/iPad)
     q = quote(f"{name}, {address}")
     return f"https://maps.apple.com/?q={q}"
 

@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Pubcrawl – {{ data.city }}</title>
 
-  <!-- Theme / PWA -->
-  <meta name="theme-color" content="#0b1220" />
+  <!-- PWA -->
+  <meta name="theme-color" content="#0e0b06" />
   <link rel="manifest" href="/static/manifest.webmanifest" />
 
-  <!-- iOS "Add to Home Screen" vibes -->
+  <!-- iOS "Add to Home Screen" -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Pubcrawl" />
@@ -21,17 +21,17 @@
 
   <style>
     :root{
-      --bg0:#070b14;
-      --bg1:#0b1220;
-      --card:#0b1220cc;
-      --card2:#0b1220f2;
-      --stroke:#22304a;
-      --text:#e8eefc;
-      --muted:#a7b3cf;
-      --accent:#4f8cff;
-      --accent2:#2b63ff;
-      --good:#2dd4bf;
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --bg0:#070502;
+      --bg1:#0e0b06;
+      --card:#12100c;
+      --stroke:#2a241a;
+      --text:#fff7d6;
+      --muted:#d7c89a;
+      --gold:#f5c542;
+      --gold2:#ffb000;
+      --good:#36d399;
+
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
       --radius: 18px;
     }
 
@@ -39,51 +39,52 @@
     html,body{ height:100%; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
       background:
-        radial-gradient(900px 500px at 20% 10%, rgba(79,140,255,.25), transparent 60%),
-        radial-gradient(900px 500px at 80% 0%, rgba(45,212,191,.16), transparent 55%),
+        radial-gradient(800px 500px at 20% 10%, rgba(245,197,66,.22), transparent 60%),
+        radial-gradient(800px 500px at 80% 0%, rgba(255,176,0,.14), transparent 55%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
-      padding: 28px 14px 40px;
+      padding: 26px 14px 40px;
     }
 
-    .wrap{
-      max-width: 980px;
-      margin: 0 auto;
-    }
+    .wrap{ max-width: 980px; margin: 0 auto; }
 
     header{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap: 16px;
-      margin-bottom: 18px;
+      gap: 14px;
+      margin-bottom: 16px;
     }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap: 12px;
-      min-width: 0;
-    }
+    .brand{ display:flex; align-items:center; gap:12px; min-width:0; }
 
     .logo{
       width:44px; height:44px;
       border-radius: 14px;
       background:
-        radial-gradient(16px 16px at 30% 25%, rgba(255,255,255,.25), transparent 60%),
-        linear-gradient(135deg, rgba(79,140,255,.95), rgba(45,212,191,.75));
+        radial-gradient(18px 18px at 30% 28%, rgba(255,255,255,.25), transparent 60%),
+        linear-gradient(135deg, rgba(245,197,66,.98), rgba(255,176,0,.85));
       box-shadow: var(--shadow);
-      border: 1px solid rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.10);
       flex: 0 0 auto;
+      position: relative;
+      overflow:hidden;
+    }
+    .logo::after{
+      content:"";
+      position:absolute;
+      inset:-60% -40%;
+      background: radial-gradient(circle at 60% 55%, rgba(255,255,255,.18), transparent 55%);
+      transform: rotate(20deg);
     }
 
     h1{
       font-size: 18px;
       line-height: 1.1;
       margin:0;
-      font-weight: 750;
+      font-weight: 850;
       letter-spacing: .2px;
       white-space: nowrap;
       overflow:hidden;
@@ -99,27 +100,24 @@
       text-overflow: ellipsis;
     }
 
-    .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap: wrap;
-      justify-content:flex-end;
-    }
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
 
     .pill{
       border: 1px solid rgba(255,255,255,.10);
-      background: rgba(11,18,32,.55);
+      background: rgba(18,16,12,.65);
       padding: 10px 12px;
       border-radius: 999px;
       color: var(--text);
       cursor:pointer;
-      font-weight: 650;
+      font-weight: 800;
       font-size: 13px;
-      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      transition: transform .08s ease, filter .2s ease, border-color .2s ease;
     }
-    .pill:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.18); }
+    .pill:hover{ transform: translateY(-1px); border-color: rgba(245,197,66,.35); }
+
     .pill.primary{
-      background: linear-gradient(180deg, rgba(79,140,255,.95), rgba(43,99,255,.95));
+      background: linear-gradient(180deg, rgba(245,197,66,.95), rgba(255,176,0,.95));
+      color: #1b1407;
       border-color: rgba(255,255,255,.10);
     }
 
@@ -127,9 +125,8 @@
       display:grid;
       grid-template-columns: 1fr;
       gap: 14px;
-      margin-top: 16px;
+      margin-top: 14px;
     }
-
     @media (min-width: 760px){
       .grid{ grid-template-columns: 1fr 1fr; }
     }
@@ -137,18 +134,17 @@
     .card{
       position:relative;
       border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(11,18,32,.78), rgba(11,18,32,.92));
+      background: linear-gradient(180deg, rgba(18,16,12,.88), rgba(18,16,12,.95));
       border: 1px solid rgba(255,255,255,.10);
       box-shadow: var(--shadow);
       padding: 16px;
       overflow:hidden;
     }
-
     .card::before{
       content:"";
       position:absolute;
       inset:-1px;
-      background: radial-gradient(600px 200px at 30% 0%, rgba(79,140,255,.18), transparent 60%);
+      background: radial-gradient(650px 220px at 30% 0%, rgba(245,197,66,.16), transparent 60%);
       pointer-events:none;
     }
 
@@ -163,18 +159,18 @@
 
     .stopno{
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: .8px;
       text-transform: uppercase;
-      color: rgba(79,140,255,.95);
+      color: rgba(245,197,66,.95);
     }
 
     .badge{
       font-size: 12px;
-      font-weight: 800;
-      color: rgba(45,212,191,.95);
-      border: 1px solid rgba(45,212,191,.25);
-      background: rgba(45,212,191,.10);
+      font-weight: 900;
+      color: rgba(255,255,255,.92);
+      border: 1px solid rgba(245,197,66,.25);
+      background: rgba(245,197,66,.10);
       padding: 6px 10px;
       border-radius: 999px;
       white-space:nowrap;
@@ -184,7 +180,7 @@
       position:relative;
       margin: 4px 0 2px;
       font-size: 18px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: .2px;
     }
 
@@ -200,18 +196,17 @@
       position:relative;
       display:flex;
       gap:10px;
-      border-left: 3px solid rgba(45,212,191,.75);
+      border-left: 3px solid rgba(245,197,66,.85);
       padding: 10px 12px;
-      background: rgba(0,0,0,.18);
+      background: rgba(0,0,0,.22);
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,.07);
       margin-bottom: 12px;
     }
-
     .ruletext{
       font-size: 13px;
       line-height: 1.35;
-      color: rgba(232,238,252,.92);
+      color: rgba(255,247,214,.94);
       margin:0;
     }
 
@@ -232,25 +227,58 @@
       justify-content:center;
       padding: 11px 14px;
       border-radius: 12px;
-      font-weight: 800;
+      font-weight: 900;
       font-size: 13px;
-      color: white;
-      background: linear-gradient(180deg, rgba(79,140,255,.95), rgba(43,99,255,.95));
+      transition: transform .08s ease, filter .2s ease, opacity .2s ease;
       border: 1px solid rgba(255,255,255,.10);
-      transition: transform .08s ease, filter .2s ease;
     }
+
     .btn:hover{ transform: translateY(-1px); filter: brightness(1.06); }
 
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(245,197,66,.95), rgba(255,176,0,.95));
+      color:#1b1407;
+    }
+
     .btn.secondary{
-      color: rgba(232,238,252,.95);
-      background: rgba(11,18,32,.55);
+      background: rgba(18,16,12,.65);
+      color: rgba(255,247,214,.95);
       border: 1px solid rgba(255,255,255,.12);
     }
 
-    .btn.ghost{
-      color: rgba(232,238,252,.90);
-      background: transparent;
-      border: 1px dashed rgba(255,255,255,.18);
+    .btn.done{
+      background: rgba(54,211,153,.14);
+      color: rgba(255,247,214,.95);
+      border: 1px solid rgba(54,211,153,.28);
+    }
+    .btn.done.active{
+      background: linear-gradient(180deg, rgba(54,211,153,.95), rgba(34,197,94,.95));
+      color:#062013;
+      border-color: rgba(255,255,255,.12);
+    }
+
+    .progress{
+      margin: 10px 0 0;
+      font-size: 12px;
+      color: rgba(215,200,154,.95);
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .bar{
+      height: 8px;
+      width: 160px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .bar > div{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, rgba(245,197,66,.95), rgba(255,176,0,.95));
     }
 
     .toast{
@@ -261,11 +289,10 @@
       padding: 12px 14px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,.12);
-      background: rgba(11,18,32,.75);
+      background: rgba(18,16,12,.78);
       box-shadow: var(--shadow);
       display:none;
     }
-
     .toast strong{ display:block; font-size: 13px; margin-bottom: 4px; }
     .toast span{ color: var(--muted); font-size: 13px; line-height: 1.35; }
     .toast .x{
@@ -281,9 +308,13 @@
 
     .footer{
       margin-top: 18px;
-      color: rgba(167,179,207,.85);
+      color: rgba(215,200,154,.85);
       font-size: 12px;
       text-align:center;
+    }
+
+    .is-done{
+      opacity: .78;
     }
   </style>
 </head>
@@ -302,6 +333,12 @@
         <div style="min-width:0">
           <h1>Pubcrawl – {{ data.city }}</h1>
           <div class="sub" id="statusLine">Opdaterer automatisk…</div>
+
+          <div class="progress">
+            <span id="progText">0 / 0 færdige</span>
+            <div class="bar" aria-hidden="true"><div id="progBar"></div></div>
+            <button class="pill" onclick="resetDone()">Nulstil</button>
+          </div>
         </div>
       </div>
 
@@ -313,7 +350,7 @@
 
     <div class="grid" id="cards">
       {% for stop in data.stops %}
-        <div class="card">
+        <div class="card" data-stop="{{ stop.stop_number }}">
           <div class="toprow">
             <div class="stopno">Stop {{ stop.stop_number }}</div>
             <div class="badge">Regel</div>
@@ -327,18 +364,17 @@
           </div>
 
           <div class="btnrow">
-            <button class="btn ghost"
-              onclick="openMapsSmart('{{ stop.apple_maps_url }}','{{ stop.maps_url }}')">
-              Åbn kort (smart)
-            </button>
-
-            <a class="btn" href="{{ stop.maps_url }}" target="_blank" rel="noopener">
+            <a class="btn primary" href="{{ stop.maps_url }}" target="_blank" rel="noopener">
               Google Maps
             </a>
 
             <a class="btn secondary" href="{{ stop.apple_maps_url }}" target="_blank" rel="noopener">
               Apple Maps
             </a>
+
+            <button class="btn done" onclick="toggleDone({{ stop.stop_number }})">
+              Færdig ✅
+            </button>
           </div>
         </div>
       {% endfor %}
@@ -350,34 +386,29 @@
   </div>
 
   <script>
-    // ========== PWA / Service Worker ==========
+    // ===== PWA / Service Worker =====
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/static/sw.js").catch(() => {});
     }
 
-    // ========== Add to Home Screen tip ==========
+    // ===== A2HS tip =====
     function isStandalone() {
       return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches)
         || (window.navigator.standalone === true);
     }
-
     function isAppleDevice() {
       const ua = navigator.userAgent || "";
       const iOS = /iPhone|iPad|iPod/i.test(ua);
       const mac = /Macintosh/i.test(ua);
       const touch = navigator.maxTouchPoints && navigator.maxTouchPoints > 1;
-      return iOS || (mac && touch); // iPadOS kan ligne Mac
+      return iOS || (mac && touch);
     }
-
     function showA2HSTip() {
       if (isStandalone()) return;
+      if (localStorage.getItem("a2hs_seen")) return;
 
       const tip = document.getElementById("a2hsTip");
       const txt = document.getElementById("a2hsText");
-
-      // Ikke spamme hver gang
-      const seen = localStorage.getItem("a2hs_seen");
-      if (seen) return;
 
       if (isAppleDevice()) {
         txt.textContent = "På iPhone/iPad: Tryk Del → “Føj til hjemmeskrm”.";
@@ -387,15 +418,62 @@
       tip.style.display = "block";
       localStorage.setItem("a2hs_seen", "1");
     }
-
     showA2HSTip();
 
-    // ========== Smart maps ==========
-    function openMapsSmart(appleUrl, googleUrl) {
-      window.open(isAppleDevice() ? appleUrl : googleUrl, "_blank", "noopener");
+    // ===== Done-state =====
+    const DONE_KEY = "pubcrawl_done_v1";
+
+    function getDoneSet() {
+      try {
+        const arr = JSON.parse(localStorage.getItem(DONE_KEY) || "[]");
+        return new Set(arr.map(Number));
+      } catch {
+        return new Set();
+      }
     }
 
-    // ========== Share ==========
+    function saveDoneSet(set) {
+      localStorage.setItem(DONE_KEY, JSON.stringify([...set]));
+    }
+
+    function toggleDone(stopNumber) {
+      const set = getDoneSet();
+      if (set.has(stopNumber)) set.delete(stopNumber);
+      else set.add(stopNumber);
+      saveDoneSet(set);
+      applyDoneUI();
+    }
+
+    function resetDone() {
+      localStorage.removeItem(DONE_KEY);
+      applyDoneUI();
+      setStatus("Nulstillet ✅");
+    }
+
+    function applyDoneUI() {
+      const set = getDoneSet();
+      const cards = document.querySelectorAll(".card[data-stop]");
+      let total = cards.length;
+      let done = 0;
+
+      cards.forEach(card => {
+        const n = Number(card.getAttribute("data-stop"));
+        const btn = card.querySelector("button.btn.done");
+        const isDone = set.has(n);
+
+        if (isDone) done++;
+
+        card.classList.toggle("is-done", isDone);
+        if (btn) btn.classList.toggle("active", isDone);
+      });
+
+      // progress
+      document.getElementById("progText").textContent = `${done} / ${total} færdige`;
+      const pct = total ? Math.round((done / total) * 100) : 0;
+      document.getElementById("progBar").style.width = pct + "%";
+    }
+
+    // ===== Share =====
     async function shareLink() {
       const url = window.location.href;
       try {
@@ -405,12 +483,10 @@
           await navigator.clipboard.writeText(url);
           setStatus("Link kopieret ✅");
         }
-      } catch {
-        // ignore
-      }
+      } catch {}
     }
 
-    // ========== Auto-refresh UI from /api/pubcrawl ==========
+    // ===== Auto-refresh from /api/pubcrawl =====
     function escapeHtml(s) {
       return String(s)
         .replaceAll("&","&amp;")
@@ -423,10 +499,8 @@
     function renderStops(data) {
       const cards = document.getElementById("cards");
       cards.innerHTML = data.stops.map(stop => {
-        const apple = stop.apple_maps_url || "";
-        const google = stop.maps_url || "";
         return `
-          <div class="card">
+          <div class="card" data-stop="${escapeHtml(stop.stop_number)}">
             <div class="toprow">
               <div class="stopno">Stop ${escapeHtml(stop.stop_number)}</div>
               <div class="badge">Regel</div>
@@ -440,29 +514,31 @@
             </div>
 
             <div class="btnrow">
-              <button class="btn ghost"
-                onclick="openMapsSmart('${escapeHtml(apple)}','${escapeHtml(google)}')">
-                Åbn kort (smart)
-              </button>
-
-              <a class="btn" href="${escapeHtml(google)}" target="_blank" rel="noopener">
+              <a class="btn primary" href="${escapeHtml(stop.maps_url)}" target="_blank" rel="noopener">
                 Google Maps
               </a>
 
-              <a class="btn secondary" href="${escapeHtml(apple)}" target="_blank" rel="noopener">
+              <a class="btn secondary" href="${escapeHtml(stop.apple_maps_url)}" target="_blank" rel="noopener">
                 Apple Maps
               </a>
+
+              <button class="btn done" onclick="toggleDone(${escapeHtml(stop.stop_number)})">
+                Færdig ✅
+              </button>
             </div>
           </div>
         `;
       }).join("");
+
+      // efter re-render: genanvend done-state
+      applyDoneUI();
     }
 
     function setStatus(text) {
       document.getElementById("statusLine").textContent = text;
     }
 
-    async function refreshData(showToast) {
+    async function refreshData(showStatus) {
       try {
         const res = await fetch("/api/pubcrawl", { cache: "no-store" });
         if (!res.ok) throw new Error("bad response");
@@ -472,14 +548,16 @@
         const t = new Date();
         const hh = String(t.getHours()).padStart(2,"0");
         const mm = String(t.getMinutes()).padStart(2,"0");
-        setStatus(`Sidst opdateret ${hh}:${mm}`);
-        if (showToast) setStatus(`Opdateret ✅ (${hh}:${mm})`);
+        setStatus(showStatus ? `Opdateret ✅ (${hh}:${mm})` : `Sidst opdateret ${hh}:${mm}`);
       } catch {
         setStatus("Kunne ikke opdatere lige nu (prøv igen).");
       }
     }
 
-    // Auto opdater hver 30 sek.
+    // init
+    applyDoneUI();
+
+    // auto opdater hver 30 sek
     setInterval(() => refreshData(false), 30000);
   </script>
 </body>
