@@ -1,13 +1,14 @@
+from urllib.parse import quote
+
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(title="Aarhus Pubcrawl")
 templates = Jinja2Templates(directory="templates")
 
-# (valgfrit men anbefalet) statiske filer til icons/manifest/service worker
-# Lav en mappe der hedder "static" i projektets rod.
+# Serve /static (icons, manifest, service worker, osv.)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
@@ -51,20 +52,32 @@ PUBCRAWL_STOPS = [
     {
         "name": "Willi's",
         "address": "Åboulevarden 39, 8000 Aarhus C",
-        "maps_url": "https://www.google.com/maps/place/Willi's/@56.1565188,10.2057896,617m/data=!3m2!1e3!4b1!4m6!3m5!1s0x464c3f70a9e4e737:0x3fc6d503e66c21be!8m2!3d56.1565188!4d10.2073005!16s%2Fg%2F11qc0bv6s9?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D",
+        "maps_url": "https://www.google.com/maps/place/Willi's/@56.1565188,10.2057896,617m/data=!3m2!1e3!4b1!4m6!3m5!1s0x464c3f70a9e4e737:0x3fc6d503e66c21be!8m2!3d56.1565188!4d10.2073005!16s%2Fg%2F11qc0bv6s9?entry=ttu",
         "rule": "Alle skal have en sidevogn.",
     },
     {
         "name": "Bodegaen",
         "address": "Åboulevarden 33, 8000 Aarhus C",
-        "maps_url": "https://www.google.com/maps/place/Bodegaen/@56.1558507,10.2086985,617m/data=!3m2!1e3!4b1!4m6!3m5!1s0x464c3f913ee136db:0xe5868952cc804806!8m2!3d56.1558507!4d10.2086985!16s%2Fg%2F1q5ccd4_0?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D",
+        "maps_url": "https://www.google.com/maps/place/Bodegaen/@56.1558507,10.2086985,617m/data=!3m2!1e3!4b1!4m6!3m5!1s0x464c3f913ee136db:0xe5868952cc804806!8m2!3d56.1558507!4d10.2086985!16s%2Fg%2F1q5ccd4_0?entry=ttu",
         "rule": "Alle skal have en sidevogn.",
     },
 ]
 
 
+def make_apple_maps_url(name: str, address: str) -> str:
+    # Åbner Apple Maps (web link som åbner Maps-app på iPhone/iPad)
+    q = quote(f"{name}, {address}")
+    return f"https://maps.apple.com/?q={q}"
+
+
 def stops_with_numbers():
-    return [{"stop_number": i + 1, **stop} for i, stop in enumerate(PUBCRAWL_STOPS)]
+    stops = []
+    for i, stop in enumerate(PUBCRAWL_STOPS):
+        s = {**stop}
+        s["stop_number"] = i + 1
+        s["apple_maps_url"] = make_apple_maps_url(s["name"], s["address"])
+        stops.append(s)
+    return stops
 
 
 @app.get("/api/pubcrawl")
@@ -78,20 +91,3 @@ def index(request: Request):
         "index.html",
         {"request": request, "data": {"city": "Aarhus C", "stops": stops_with_numbers()}},
     )
-
-
-# PWA manifest endpoint (din HTML linker til /manifest.webmanifest)
-@app.get("/manifest.webmanifest")
-def manifest():
-    return {
-        "name": "Pubcrawl Aarhus",
-        "short_name": "Pubcrawl",
-        "start_url": "/",
-        "display": "standalone",
-        "background_color": "#0B1220",
-        "theme_color": "#0B1220",
-        "icons": [
-            {"src": "/static/icon-192.png", "sizes": "192x192", "type": "image/png"},
-            {"src": "/static/icon-512.png", "sizes": "512x512", "type": "image/png"},
-        ],
-    }
