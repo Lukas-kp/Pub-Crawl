@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pubcrawl – Aarhus C</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Helvetica, Arial, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+    }
+
+    header {
+      padding: 16px;
+      background: #020617;
+      border-bottom: 1px solid #1e293b;
+      position: sticky;
+      top: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .container {
+      padding: 12px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .stop-number {
+      font-size: 0.8rem;
+      color: #38bdf8;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .bar-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 0 0 4px 0;
+    }
+
+    .address {
+      font-size: 0.9rem;
+      color: #cbd5f5;
+      margin-bottom: 10px;
+    }
+
+    .rule {
+      background: #020617;
+      border-left: 4px solid #22c55e;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+
+    a.maps-btn {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 12px;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a.maps-btn:active {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Pubcrawl – {{ data.city }}</h1>
+  </header>
+
+  <div class="container">
+    {% for stop in data.stops %}
+      <div class="card">
+        <div class="stop-number">Stop {{ stop.stop_number }}</div>
+
+        <div class="bar-name">{{ stop.name }}</div>
+        <div class="address">{{ stop.address }}</div>
+
+        <div class="rule">
+          {{ stop.rule }}
+        </div>
+
+        <a class="maps-btn"
+           href="{{ stop.maps_url }}"
+           target="_blank"
+           rel="noopener noreferrer">
+          Åbn i Google Maps
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>
