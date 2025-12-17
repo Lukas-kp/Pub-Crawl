@@ -1,9 +1,15 @@
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(title="Aarhus Pubcrawl")
 templates = Jinja2Templates(directory="templates")
+
+# (valgfrit men anbefalet) statiske filer til icons/manifest/service worker
+# Lav en mappe der hedder "static" i projektets rod.
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 
 PUBCRAWL_STOPS = [
     {
@@ -54,14 +60,17 @@ PUBCRAWL_STOPS = [
         "maps_url": "https://www.google.com/maps/place/Bodegaen/@56.1558507,10.2086985,617m/data=!3m2!1e3!4b1!4m6!3m5!1s0x464c3f913ee136db:0xe5868952cc804806!8m2!3d56.1558507!4d10.2086985!16s%2Fg%2F1q5ccd4_0?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D",
         "rule": "Alle skal have en sidevogn.",
     },
+]
 
 
 def stops_with_numbers():
     return [{"stop_number": i + 1, **stop} for i, stop in enumerate(PUBCRAWL_STOPS)]
 
+
 @app.get("/api/pubcrawl")
 def get_pubcrawl():
     return {"city": "Aarhus C", "stops": stops_with_numbers()}
+
 
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
@@ -69,3 +78,20 @@ def index(request: Request):
         "index.html",
         {"request": request, "data": {"city": "Aarhus C", "stops": stops_with_numbers()}},
     )
+
+
+# PWA manifest endpoint (din HTML linker til /manifest.webmanifest)
+@app.get("/manifest.webmanifest")
+def manifest():
+    return {
+        "name": "Pubcrawl Aarhus",
+        "short_name": "Pubcrawl",
+        "start_url": "/",
+        "display": "standalone",
+        "background_color": "#0B1220",
+        "theme_color": "#0B1220",
+        "icons": [
+            {"src": "/static/icon-192.png", "sizes": "192x192", "type": "image/png"},
+            {"src": "/static/icon-512.png", "sizes": "512x512", "type": "image/png"},
+        ],
+    }
