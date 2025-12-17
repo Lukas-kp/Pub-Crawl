@@ -43,12 +43,18 @@ PUBCRAWL_STOPS = [
         "rule": "Ingen siger et ord før de har drukket en genstand.",
     },
     {
-        "name": "Herr Bartels",
-        "address": "Åboulevarden 46, 8000 Aarhus C",
-        "maps_url": "https://www.google.com/maps/search/?api=1&query=Herr%20Bartels%20%C3%85boulevarden%2046%2C%208000%20Aarhus%20C",
+        "name": "Bodegaen",
+        "address": "Åboulevarden 39, 8000 Aarhus C",
+        "maps_url": "https://www.google.com/maps/place/Willi's/@56.1565188,10.2057896,617m/data=!3m2!1e3!4b1!4m6!3m5!1s0x464c3f70a9e4e737:0x3fc6d503e66c21be!8m2!3d56.1565188!4d10.2073005!16s%2Fg%2F11qc0bv6s9?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D",
         "rule": "Alle skal have en sidevogn.",
     },
-]
+    {
+        "name": "Bodegaen",
+        "address": "Åboulevarden 33, 8000 Aarhus C",
+        "maps_url": "https://www.google.com/maps/place/Bodegaen/@56.1558507,10.2086985,617m/data=!3m2!1e3!4b1!4m6!3m5!1s0x464c3f913ee136db:0xe5868952cc804806!8m2!3d56.1558507!4d10.2086985!16s%2Fg%2F1q5ccd4_0?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D",
+        "rule": "Alle skal have en sidevogn.",
+    },
+
 
 def stops_with_numbers():
     return [{"stop_number": i + 1, **stop} for i, stop in enumerate(PUBCRAWL_STOPS)]
