@@ -1,4 +1,4 @@
-const CACHE = "pubcrawl-v2";
+const CACHE = "pubcrawl-yellow-v1";
 const ASSETS = [
   "/",
   "/api/pubcrawl",
@@ -24,7 +24,6 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
 
-  // Network-first for API (så den opdaterer når muligt)
   if (url.pathname === "/api/pubcrawl") {
     event.respondWith(
       fetch(event.request).then(r => {
@@ -36,7 +35,6 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Cache-first ellers
   event.respondWith(
     caches.match(event.request).then(cached => cached || fetch(event.request))
   );
